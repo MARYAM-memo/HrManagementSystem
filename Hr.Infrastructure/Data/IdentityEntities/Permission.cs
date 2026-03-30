@@ -1,0 +1,15 @@
+using System;
+
+namespace Hr.Infrastructure.Data.IdentityEntities;
+
+public class Permission
+{
+      public int Id { get; set; }
+
+      public string Name { get; set; } = null!;
+
+      public string? Description { get; set; }
+
+      // navigation
+      public ICollection<RolePermission> RolePermissions { get; set; } = [];
+}
