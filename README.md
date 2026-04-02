@@ -4,7 +4,7 @@ HR management system to track employees, attendance, leaves, and payroll.
 	**Database:** PostgreSQL
 
 # Entities
-<img width="782" height="756" alt="HRSYS_Entities" src="https://github.com/user-attachments/assets/fb84e876-95c3-4ca3-93f9-24c11e7cbbe2" />
+<img width="782" height="756" alt="HRSYS_Entities" src="https://github.com/user-attachments/assets/7f485344-9f84-41e2-836f-34f96cef7575" />
 
 # First Commit
    **Fully Defined Models:** Employees, Departments, JobTitles, Payrolls, Adjustments, Attendances, Leaves
