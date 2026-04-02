@@ -1,0 +1,157 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Hr.Core.Entities
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+    var roles = user != null ? await UserManager.GetRolesAsync(user) : new List<string>();
+}
+
+<nav id="sidebar" class="sidebar">
+    <div class="sidebar-content">
+        <a class="sidebar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+            <span class="align-middle">HR System</span>
+        </a>
+
+        <ul class="sidebar-nav">
+            @if (roles.Contains("Admin"))
+            {
+                <!-- Admin Menu -->
+                <li class="sidebar-header">الإدارة</li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                        <i class="align-middle" data-feather="home"></i>
+                        <span class="align-middle">لوحة التحكم</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="Admin" asp-controller="Users" asp-action="Index">
+                        <i class="align-middle" data-feather="users"></i>
+                        <span class="align-middle">المستخدمين</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="Admin" asp-controller="Roles" asp-action="Index">
+                        <i class="align-middle" data-feather="shield"></i>
+                        <span class="align-middle">الأدوار والصلاحيات</span>
+                    </a>
+                </li>
+            }
+
+            @if (roles.Contains("HR") || roles.Contains("Admin"))
+            {
+                <!-- HR Menu -->
+                <li class="sidebar-header">الموارد البشرية</li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="HR" asp-controller="Employees" asp-action="Index">
+                        <i class="align-middle" data-feather="user-check"></i>
+                        <span class="align-middle">الموظفين</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="HR" asp-controller="Departments" asp-action="Index">
+                        <i class="align-middle" data-feather="layers"></i>
+                        <span class="align-middle">الإدارات</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="HR" asp-controller="JobTitles" asp-action="Index">
+                        <i class="align-middle" data-feather="briefcase"></i>
+                        <span class="align-middle">المسميات الوظيفية</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="HR" asp-controller="Payrolls" asp-action="Index">
+                        <i class="align-middle" data-feather="dollar-sign"></i>
+                        <span class="align-middle">الرواتب</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="HR" asp-controller="Attendance" asp-action="Index">
+                        <i class="align-middle" data-feather="calendar"></i>
+                        <span class="align-middle">الحضور والانصراف</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="HR" asp-controller="Leaves" asp-action="Index">
+                        <i class="align-middle" data-feather="umbrella"></i>
+                        <span class="align-middle">الإجازات</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="HR" asp-controller="Reports" asp-action="Index">
+                        <i class="align-middle" data-feather="bar-chart-2"></i>
+                        <span class="align-middle">التقارير</span>
+                    </a>
+                </li>
+            }
+
+            @if (roles.Contains("Manager") || roles.Contains("HR") || roles.Contains("Admin"))
+            {
+                <!-- Manager Menu -->
+                <li class="sidebar-header">إدارة الفريق</li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="Manager" asp-controller="Team" asp-action="Index">
+                        <i class="align-middle" data-feather="users"></i>
+                        <span class="align-middle">فريقي</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="Manager" asp-controller="LeaveApprovals" asp-action="Index">
+                        <i class="align-middle" data-feather="check-circle"></i>
+                        <span class="align-middle">موافقات الإجازات</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="Manager" asp-controller="TeamAttendance" asp-action="Index">
+                        <i class="align-middle" data-feather="clock"></i>
+                        <span class="align-middle">حضور الفريق</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="Manager" asp-controller="TeamPayroll" asp-action="Index">
+                        <i class="align-middle" data-feather="file-text"></i>
+                        <span class="align-middle">رواتب الفريق</span>
+                    </a>
+                </li>
+            }
+
+            @if (!roles.Contains("Admin") && !roles.Contains("HR") && !roles.Contains("Manager") && user != null)
+            {
+                <!-- Employee Menu -->
+                <li class="sidebar-header">لوحتي الشخصية</li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="Employee" asp-controller="Dashboard" asp-action="Index">
+                        <i class="align-middle" data-feather="home"></i>
+                        <span class="align-middle">الرئيسية</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="Employee" asp-controller="MyProfile" asp-action="Index">
+                        <i class="align-middle" data-feather="user"></i>
+                        <span class="align-middle">ملفي الشخصي</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="Employee" asp-controller="MyAttendance" asp-action="Index">
+                        <i class="align-middle" data-feather="clock"></i>
+                        <span class="align-middle">تسجيل الحضور</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="Employee" asp-controller="MyLeaves" asp-action="Index">
+                        <i class="align-middle" data-feather="calendar"></i>
+                        <span class="align-middle">إجازاتي</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" asp-area="Employee" asp-controller="MyPayroll" asp-action="Index">
+                        <i class="align-middle" data-feather="dollar-sign"></i>
+                        <span class="align-middle">كشوف مرتباتي</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</nav>

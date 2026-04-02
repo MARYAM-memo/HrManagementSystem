@@ -1,0 +1,222 @@
+ * {
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+ }
+
+ html,
+ body {
+       overflow-x: hidden;
+       width: 100%;
+       margin: 0;
+       padding: 0;
+       font-family: 'Inter', sans-serif;
+       background-color: #f5f7fb;
+ }
+
+ .wrapper {
+       display: flex;
+       width: 100%;
+       overflow-x: hidden;
+ }
+
+ .main {
+       flex: 1;
+       margin-left: 260px;
+       min-height: 100vh;
+       display: flex;
+       flex-direction: column;
+       overflow-x: hidden;
+ }
+
+ /* Content Area with Scroll */
+ .content {
+       flex: 1;
+       padding: 20px;
+       overflow-y: auto;
+ }
+
+ .sidebar {
+       position: fixed;
+       top: 0;
+       left: 0;
+       bottom: 0;
+       width: 260px;
+       background: #222e3c;
+       z-index: 1000;
+       overflow-y: auto;
+       overflow-x: hidden;
+       transition: transform 0.3s ease;
+ }
+
+ .footer {
+       margin-top: auto;
+ }
+
+ /* تحسين شكل الـ Scrollbar للـ Sidebar */
+ .sidebar::-webkit-scrollbar {
+       width: 6px;
+ }
+
+ .sidebar::-webkit-scrollbar-track {
+       background: #1a242f;
+ }
+
+ .sidebar::-webkit-scrollbar-thumb {
+       background: #3b7ddd;
+       border-radius: 3px;
+ }
+
+ .sidebar::-webkit-scrollbar-thumb:hover {
+       background: #2f64b1;
+ }
+
+ /* تحسين شكل الـ Scrollbar للمحتوى الرئيسي */
+ .main::-webkit-scrollbar {
+       width: 8px;
+ }
+
+ .main::-webkit-scrollbar-track {
+       background: #e9ecef;
+ }
+
+ .main::-webkit-scrollbar-thumb {
+       background: #adb5bd;
+       border-radius: 4px;
+ }
+
+ .main::-webkit-scrollbar-thumb:hover {
+       background: #6c757d;
+ }
+
+ /* Custom Scrollbar for Content */
+ .content::-webkit-scrollbar {
+       width: 8px;
+ }
+
+ .content::-webkit-scrollbar-track {
+       background: #e9ecef;
+       border-radius: 4px;
+ }
+
+ .content::-webkit-scrollbar-thumb {
+       background: #adb5bd;
+       border-radius: 4px;
+ }
+
+ .content::-webkit-scrollbar-thumb:hover {
+       background: #6c757d;
+ }
+
+ /* Footer */
+ .footer {
+       background: #fff;
+       padding: 1rem 1.5rem;
+       border-top: 1px solid #dee2e6;
+       margin-top: auto;
+ }
+
+ /* Navbar Styles */
+ .navbar-bg {
+       background: #fff;
+       box-shadow: 0 0 2rem 0 rgba(33, 37, 41, 0.1);
+       padding: 0.875rem 1.375rem;
+ }
+
+ .sidebar-toggle {
+       cursor: pointer;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       width: 32px;
+       height: 32px;
+       border-radius: 4px;
+       transition: background 0.2s;
+ }
+
+ .sidebar-toggle:hover {
+       background: #e9ecef;
+ }
+
+ .hamburger {
+       width: 20px;
+       height: 2px;
+       background: #495057;
+       position: relative;
+       display: inline-block;
+ }
+
+ .hamburger:before,
+ .hamburger:after {
+       content: "";
+       width: 20px;
+       height: 2px;
+       background: #495057;
+       position: absolute;
+       left: 0;
+       transition: all 0.2s;
+ }
+
+ .hamburger:before {
+       top: -6px;
+ }
+
+ .hamburger:after {
+       bottom: -6px;
+ }
+
+ /* Navbar Items */
+ .navbar-align {
+       margin-left: auto;
+ }
+
+ .nav-icon {
+       color: #6c757d;
+       font-size: 1.25rem;
+       padding: 0.5rem;
+       transition: color 0.2s;
+ }
+
+ .nav-icon:hover {
+       color: #3b7ddd;
+ }
+
+ /* Dropdown Menu */
+ .dropdown-menu {
+       border: none;
+       box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+       border-radius: 0.5rem;
+ }
+
+ .dropdown-item {
+       padding: 0.5rem 1rem;
+       transition: background 0.2s;
+ }
+
+ .dropdown-item i {
+       width: 20px;
+       margin-right: 8px;
+ }
+
+ .dropdown-item:hover {
+       background-color: #f8f9fa;
+ }
+
+ .dropdown-item.text-danger:hover {
+       background-color: #fff5f5;
+ }
+
+ /* Responsive */
+ @media (max-width: 768px) {
+       .sidebar {
+             transform: translateX(-100%);
+       }
+
+       .sidebar.show {
+             transform: translateX(0);
+       }
+
+       .main {
+             margin-left: 0;
+       }
+ }
