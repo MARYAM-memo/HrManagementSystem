@@ -1,10 +1,14 @@
+using Hr.Application.interfaces;
+using Hr.Infrastructure.DataAccess;
 using Hr.MVC.Extensions;
+using Hr.MVC.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddConnectionString(builder); //extension
 builder.Services.AddApplicationIdentity(); //extension
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddControllersWithViews();
 
@@ -18,9 +22,11 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseStatusCodePagesWithReExecute("/Common/Errors/Error", "?code={0}");
     app.UseHsts();
 }
+
+app.UseMiddleware<RequestLoggingMiddleware>();
 
 app.UseHttpsRedirection();
 app.MapStaticAssets();
@@ -33,14 +39,12 @@ await app.Services.AddScopeToUserAndRole(); //extension
 
 app.MapControllerRoute(
     name: "areas",
-    pattern: "{area:exists}/{controller=Users}/{action=Index}/{id?}");
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Home}/{action=Index}/{id?}",
+    defaults: new { area = "Common" })
     .WithStaticAssets();
-
-app.MapRazorPages()
-   .WithStaticAssets();
 
 app.Run();

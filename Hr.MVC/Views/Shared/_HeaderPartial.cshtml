@@ -1,0 +1,61 @@
+﻿@using System.Reflection.Metadata
+@using Hr.Shared
+<nav class="navbar navbar-expand-sm navbar-light navbar-bg">
+    <a class="sidebar-toggle js-sidebar-toggle">
+        <i class="hamburger align-self-center"></i>
+    </a>
+
+    <div class="navbar-collapse collapse">
+        <ul class="navbar-nav navbar-align">
+            <li class="nav-item dropdown">
+                <!-- أيقونة للشاشات الصغيرة -->
+                <a class="nav-link dropdown-toggle d-inline-block d-sm-none" data-bs-toggle="dropdown" role="button">
+                    <i class="fa-solid fa-gear"></i>
+                </a>
+
+                <!-- النص للشاشات الكبيرة -->
+                <a class="nav-link dropdown-toggle d-none d-sm-inline-block" data-bs-toggle="dropdown" href="#"
+                       role="button">
+                    @{
+                        var currentUser = await UserManager.GetUserAsync(User);
+                        var initial = currentUser?.FullName?.Split(" ").First() ?? "User";
+                    }
+                    @initial.
+                    
+                    @{
+                        var userRoles = currentUser != null ? await UserManager.GetRolesAsync(currentUser) : new
+                    List<string>();
+                        var role = Constants.UserRole;
+
+                        if (userRoles.Contains(Constants.AdminRole))
+                            role = Constants.AdminRole;
+                        else if (userRoles.Contains(Constants.ManagerRole))
+                            role = Constants.ManagerRole;
+                        else if (userRoles.Contains(Constants.HrRole))
+                            role = Constants.HrRole;
+                        else if (userRoles.Contains(Constants.EmployeeRole))
+                            role = Constants.EmployeeRole;
+
+                        @role
+                    }
+              
+                </a>
+
+                <!-- القائمة المنسدلة (واحدة فقط) -->
+                <div class="dropdown-menu dropdown-menu-end">
+                    <a class="dropdown-item" asp-area="Employee" asp-controller="MyProfile" asp-action="Index">
+                        <i class="fa-solid fa-circle-user"></i> My Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" asp-area="Employee" asp-controller="MyProfile" asp-action="ChangePassword">
+                        <i class="fa-solid fa-unlock"></i> Change Password
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" asp-area="Common" asp-controller="Account" asp-action="Logout">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

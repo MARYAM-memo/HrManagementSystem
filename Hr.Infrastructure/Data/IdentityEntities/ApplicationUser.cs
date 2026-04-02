@@ -13,7 +13,4 @@ public class ApplicationUser : IdentityUser<int>
       public string? ProfilePicture { get; set; }
 
       public DateOnly CreatedAt { get; set; } = DateOnly.FromDateTime(DateTime.Now);
-
-      public int? EmployeeId { get; set; }
-      public Employee? Employee { get; set; }
 }

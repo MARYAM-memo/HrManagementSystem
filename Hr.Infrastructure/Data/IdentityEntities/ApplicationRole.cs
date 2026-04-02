@@ -1,3 +1,4 @@
+using Hr.Core.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace Hr.Infrastructure.Data.IdentityEntities;

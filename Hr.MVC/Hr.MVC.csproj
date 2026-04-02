@@ -16,12 +16,31 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas/Admin/Controllers/" />
+    <Folder Include="Areas/Admin/Views/Dashboard/" />
+    <Folder Include="Areas/Common/ViewModels/" />
+    <Folder Include="Areas/Common/ViewModels/Account/" />
+    <Folder Include="Areas/Common/Views/Account/" />
+    <Folder Include="Areas/Common/Views/Home/" />
+    <Folder Include="Areas/Employee/" />
+    <Folder Include="Areas/Employee/Controllers/" />
+    <Folder Include="Areas/Employee/ViewModels/" />
+    <Folder Include="Areas/Employee/ViewModels/MyLeaves/" />
+    <Folder Include="Areas/Employee/ViewModels/MyProfile/" />
+    <Folder Include="Areas/Employee/Views/" />
+    <Folder Include="Areas/HR/" />
+    <Folder Include="Areas/HR/Controllers/" />
+    <Folder Include="Areas/HR/Views/" />
+    <Folder Include="Areas/Manager/" />
+    <Folder Include="Areas/Manager/Controllers/" />
+    <Folder Include="Areas/Manager/Views/" />
     <Folder Include="Extensions/" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="../Hr.Application/Hr.Application.csproj" />
     <ProjectReference Include="../Hr.Infrastructure/Hr.Infrastructure.csproj" />
+    <ProjectReference Include="../Hr.Shared/Hr.Shared.csproj" />
   </ItemGroup>
 
 </Project>

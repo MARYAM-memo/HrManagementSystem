@@ -45,6 +45,14 @@ public static class AppServiceConfig
             .AddRoleManager<RoleManager<ApplicationRole>>()
             .AddSignInManager<SignInManager<ApplicationUser>>();
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                  options.LoginPath = "/Common/Account/Login";
+                  options.LogoutPath = "/Common/Account/Logout";
+                  options.AccessDeniedPath = "/Common/Errors/AccessDenied";
+                  options.ExpireTimeSpan = TimeSpan.FromDays(7);
+                  options.SlidingExpiration = true;
+            });
             return services;
       }
 
